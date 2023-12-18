@@ -1,4 +1,5 @@
 import { Grid, GridItem, Show } from '@chakra-ui/react'
+import NavBar from '../../components/nav-bar'
 import { LAYOUT_AREAS } from '../../theme/layout-areas.const'
 
 export const MainPage = () => {
@@ -10,7 +11,7 @@ export const MainPage = () => {
       }}
     >
       <GridItem area={LAYOUT_AREAS.nav} bg="azure">
-        Navbar
+        <NavBar />
       </GridItem>
       <Show above="lg">
         <GridItem area={LAYOUT_AREAS.aside} bg="blanchedalmond">
