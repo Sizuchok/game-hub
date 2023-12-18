@@ -1,5 +1,5 @@
 import { Grid, GridItem, Show } from '@chakra-ui/react'
-import NavBar from '../../components/nav-bar'
+import NavBar from '../../components/layout/nav-bar'
 import { LAYOUT_AREAS } from '../../theme/layout-areas.const'
 
 export const MainPage = () => {
