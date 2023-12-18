@@ -10,17 +10,13 @@ export const MainPage = () => {
         lg: `"${LAYOUT_AREAS.nav} ${LAYOUT_AREAS.nav}" "${LAYOUT_AREAS.aside} ${LAYOUT_AREAS.main}"`,
       }}
     >
-      <GridItem area={LAYOUT_AREAS.nav} bg="azure">
+      <GridItem area={LAYOUT_AREAS.nav}>
         <NavBar />
       </GridItem>
       <Show above="lg">
-        <GridItem area={LAYOUT_AREAS.aside} bg="blanchedalmond">
-          ASide
-        </GridItem>
+        <GridItem area={LAYOUT_AREAS.aside}>ASide</GridItem>
       </Show>
-      <GridItem area={LAYOUT_AREAS.main} bg="blueviolet">
-        Main
-      </GridItem>
+      <GridItem area={LAYOUT_AREAS.main}>Main</GridItem>
     </Grid>
   )
 }
