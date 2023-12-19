@@ -4,4 +4,11 @@ export type Game = {
   name: string
   description: string
   background_image: string
+  parent_platforms: { platform: Platform }[]
+}
+
+export type Platform = {
+  id: number
+  name: string
+  slug: string
 }

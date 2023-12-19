@@ -1,11 +1,20 @@
 import { Button, Grid, GridItem, Show } from '@chakra-ui/react'
+import { useEffect } from 'react'
 import { LAYOUT_AREAS } from '../../common/theme/layout-areas.const'
 import NavBar from '../../components/layout/nav-bar'
 import GamesGrid from '../../game/components/games-grid'
 import { useGetInfiniteGames } from '../../game/hooks/get-infinite-games.hook'
+import { apiClient } from '../../services/api-client'
 
 export const MainPage = () => {
   const { data, fetchNextPage } = useGetInfiniteGames()
+
+  useEffect(() => {
+    ;(async () => {
+      const kek = await apiClient.get('platforms')
+      console.log(kek.data)
+    })()
+  }, [])
 
   return (
     <Grid
