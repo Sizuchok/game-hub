@@ -3,4 +3,5 @@ export type Game = {
   slug: string
   name: string
   description: string
+  background_image: string
 }

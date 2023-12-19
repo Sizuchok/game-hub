@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
+import { QUERY_KEYS_GAMES } from '../../common/const/app-keys.const'
+import { RawgResponse } from '../../common/types/base.types'
+import { Game } from '../../common/types/games.types'
 import { gamesService } from '../../services/games.service'
-import { QUERY_KEYS_GAMES } from '../const/app-keys.const'
-import { RawgResponse } from '../types/base.types'
-import { Game } from '../types/games.types'
 
 export const useGetInfiniteGames = () => {
   return useInfiniteQuery({

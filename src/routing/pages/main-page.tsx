@@ -1,7 +1,8 @@
 import { Button, Grid, GridItem, Show } from '@chakra-ui/react'
-import { useGetInfiniteGames } from '../../common/hooks/get-all-games.hook'
+import { LAYOUT_AREAS } from '../../common/theme/layout-areas.const'
 import NavBar from '../../components/layout/nav-bar'
-import { LAYOUT_AREAS } from '../../theme/layout-areas.const'
+import GamesGrid from '../../game/components/games-grid'
+import { useGetInfiniteGames } from '../../game/hooks/get-infinite-games.hook'
 
 export const MainPage = () => {
   const { data, fetchNextPage } = useGetInfiniteGames()
@@ -20,10 +21,8 @@ export const MainPage = () => {
         <GridItem area={LAYOUT_AREAS.aside}>ASide</GridItem>
       </Show>
       <GridItem area={LAYOUT_AREAS.main}>
-        {data?.pages.map(({ results }) =>
-          results.map(game => <div key={game.id}>{game.name}</div>),
-        )}
-        <Button onClick={() => fetchNextPage}> More</Button>
+        {data?.pages && <GamesGrid gamePages={data.pages} />}
+        <Button onClick={() => fetchNextPage()}> More</Button>
       </GridItem>
     </Grid>
   )
