@@ -5,6 +5,7 @@ export type Game = {
   description: string
   background_image: string
   parent_platforms: { platform: Platform }[]
+  metacritic: number
 }
 
 export type Platform = {

@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios'
-import { apiClient } from './api-client'
+import { apiClient } from './utils/api-client'
 
 export class HttpService {
   constructor(private endpoint: string) {

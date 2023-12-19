@@ -4,7 +4,7 @@ import { LAYOUT_AREAS } from '../../common/theme/layout-areas.const'
 import NavBar from '../../components/layout/nav-bar'
 import GamesGrid from '../../game/components/games-grid'
 import { useGetInfiniteGames } from '../../game/hooks/get-infinite-games.hook'
-import { apiClient } from '../../services/api-client'
+import { apiClient } from '../../services/utils/api-client'
 
 export const MainPage = () => {
   const { data, fetchNextPage } = useGetInfiniteGames()
