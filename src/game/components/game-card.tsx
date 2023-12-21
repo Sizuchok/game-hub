@@ -1,8 +1,10 @@
-import { Card, CardBody, HStack, Heading, Image } from '@chakra-ui/react'
+import { CardBody, HStack, Heading, Image } from '@chakra-ui/react'
+import BackgroundPlaceholder from '../../assets/game-backgroud-image-placeholder.jpg'
 import { Game } from '../../common/types/games.types'
 import { getCroppedImageUrl } from '../../services/utils/get-croppod-image-url.util'
 import CriticScore from './critic-score'
 import GamePlatforms from './game-platforms'
+import StyledGameCard from './styled-game-card'
 
 type Props = {
   game: Game
@@ -10,16 +12,20 @@ type Props = {
 
 const GameCard = ({ game }: Props) => {
   return (
-    <Card borderRadius={10} overflow="hidden">
-      <Image src={getCroppedImageUrl(game.background_image)} />
+    <StyledGameCard>
+      <Image
+        src={
+          game.background_image ? getCroppedImageUrl(game.background_image) : BackgroundPlaceholder
+        }
+      />
       <CardBody>
-        <Heading fontSize="2xl">{game.name}</Heading>
-        <HStack justifyContent="space-between">
+        <HStack justifyContent="space-between" marginY={1} height={'21px'}>
           <GamePlatforms platforms={game.parent_platforms.map(({ platform }) => platform)} />
           <CriticScore score={game.metacritic} />
         </HStack>
+        <Heading fontSize="2xl">{game.name}</Heading>
       </CardBody>
-    </Card>
+    </StyledGameCard>
   )
 }
 export default GameCard

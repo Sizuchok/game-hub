@@ -1,15 +1,16 @@
-export type Game = {
-  id: number
-  slug: string
-  name: string
+import { RawgCore, RawgQueryParams } from './base.types'
+import { Platform } from './platform.type'
+import { Prettify } from './prettify.type'
+
+export type Game = Prettify<RawgCore> & {
   description: string
-  background_image: string
+  background_image: string | null
   parent_platforms: { platform: Platform }[]
   metacritic: number
 }
 
-export type Platform = {
-  id: number
-  name: string
-  slug: string
+export type GamesQueryParams = Prettify<RawgQueryParams> & {
+  search?: string
+  parent_platforms?: string
+  genres?: string
 }

@@ -5,8 +5,13 @@ export const RAWG_KEYS = {
 
 export const RAWG_ENDPOINTS = {
   games: 'games',
+  genres: 'genres',
 } as const
 
 export const QUERY_KEYS_GAMES = {
   getAll: 'get-all-games',
+} as const
+
+export const QUERY_KEYS_GENRES = {
+  getAll: 'get-all-genres',
 } as const
