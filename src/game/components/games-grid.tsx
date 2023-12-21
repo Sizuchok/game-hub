@@ -22,7 +22,6 @@ const GamesGrid = ({ queryParams }: Props) => {
         xl: 5,
       }}
       spacing={6}
-      marginX={8}
     >
       {games.map(game => (
         <GameCard game={game} key={game.id} />

@@ -1,7 +1,7 @@
 import { HStack, Icon } from '@chakra-ui/react'
 import { IconType } from 'react-icons'
 import { BsApple, BsGlobe } from 'react-icons/bs'
-import { FaLinux, FaPlaystation, FaWindows, FaXbox } from 'react-icons/fa'
+import { FaLinux, FaPlaystation, FaQuestionCircle, FaWindows, FaXbox } from 'react-icons/fa'
 import { MdPhoneIphone } from 'react-icons/md'
 import { SiNintendoswitch } from 'react-icons/si'
 import { TfiAndroid } from 'react-icons/tfi'
@@ -41,7 +41,11 @@ const GamePlatforms = ({ platforms }: Props) => {
       }}
     >
       {platforms.map(platform => (
-        <Icon as={iconsMap[platform.slug]} color={'gray.400'} key={platform.id} />
+        <Icon
+          as={iconsMap[platform.slug] ?? FaQuestionCircle}
+          color={'gray.400'}
+          key={platform.id}
+        />
       ))}
     </HStack>
   )

@@ -6,6 +6,7 @@ export const RAWG_KEYS = {
 export const RAWG_ENDPOINTS = {
   games: 'games',
   genres: 'genres',
+  parentPlatforms: 'platforms/lists/parents',
 } as const
 
 export const QUERY_KEYS_GAMES = {
@@ -14,4 +15,8 @@ export const QUERY_KEYS_GAMES = {
 
 export const QUERY_KEYS_GENRES = {
   getAll: 'get-all-genres',
+} as const
+
+export const QUERY_KEYS_PLATFORMS = {
+  getAll: 'get-all-platforms',
 } as const
