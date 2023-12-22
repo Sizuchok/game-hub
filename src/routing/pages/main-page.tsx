@@ -68,7 +68,7 @@ export const MainPage = () => {
       <Show above="lg">
         <GridItem area={LAYOUT_AREAS.aside}>
           <Box as="aside" marginLeft={8} position={'sticky'} top={0}>
-            <Genres handleGenreChange={handleGenreChange} />
+            <Genres queryParams={queryParams} handleGenreChange={handleGenreChange} />
           </Box>
         </GridItem>
       </Show>
