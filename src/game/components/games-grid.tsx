@@ -13,6 +13,8 @@ const GamesGrid = ({ gameQuery }: Props) => {
   const games = data?.pages.flatMap(page => page.results) ?? []
   const skeletons = new Array(15).fill('')
 
+  console.log(games)
+
   return (
     <SimpleGrid
       columns={{

@@ -8,6 +8,7 @@ export type Game = Prettify<RawgCore> & {
   background_image: string | null
   parent_platforms?: { platform: Platform }[]
   metacritic: number
+  rating_top: number | null | 3 | 4 | 1 | 5
 }
 
 export type GamesQueryParams = Prettify<RawgQueryParams> & {
