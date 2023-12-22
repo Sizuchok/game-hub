@@ -9,7 +9,14 @@ type Props = {
 const MainContainer = ({ children }: Props) => {
   return (
     <Box maxWidth={MAX_WIDTH} marginX="auto">
-      <Box marginX={8}>{children}</Box>
+      <Box
+        marginX={{
+          base: 3,
+          sm: 8,
+        }}
+      >
+        {children}
+      </Box>
     </Box>
   )
 }

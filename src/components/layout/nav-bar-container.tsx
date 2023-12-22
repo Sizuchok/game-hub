@@ -7,7 +7,17 @@ type Props = {
 
 const NavBarContainer = ({ children }: Props) => {
   return (
-    <HStack paddingX={10} paddingY={6} spacing={8}>
+    <HStack
+      paddingX={{
+        base: 3,
+        sm: 10,
+      }}
+      paddingY={6}
+      spacing={{
+        base: 4,
+        sm: 8,
+      }}
+    >
       {children}
     </HStack>
   )
