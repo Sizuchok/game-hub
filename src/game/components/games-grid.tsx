@@ -1,15 +1,15 @@
 import { Button, SimpleGrid } from '@chakra-ui/react'
-import { GamesQueryParams } from '../../common/types/games.types'
+import { GameQuery } from '../../common/types/games.types'
 import { useGetInfiniteGames } from '../hooks/get-infinite-games.hook'
 import GameCard from './game-card'
 import GameCardSkeleton from './game-card-skeleton'
 
 type Props = {
-  queryParams: GamesQueryParams
+  gameQuery: GameQuery
 }
 
-const GamesGrid = ({ queryParams }: Props) => {
-  const { data, fetchNextPage, isFetching } = useGetInfiniteGames(queryParams)
+const GamesGrid = ({ gameQuery }: Props) => {
+  const { data, fetchNextPage, isFetching } = useGetInfiniteGames(gameQuery)
   const games = data?.pages.flatMap(page => page.results) ?? []
   const skeletons = new Array(15).fill('')
 

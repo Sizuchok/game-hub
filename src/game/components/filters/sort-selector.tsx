@@ -1,9 +1,9 @@
 import { Box, Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import { BsChevronDown } from 'react-icons/bs'
-import { GamesQueryParams, TwoWayGameSortOrder } from '../../../common/types/games.types'
+import { GameQuery, TwoWayGameSortOrder } from '../../../common/types/games.types'
 
 type Props = {
-  queryParams: GamesQueryParams
+  gameQuery: GameQuery
   onSelectOrder: (order: TwoWayGameSortOrder) => void
 }
 
@@ -12,7 +12,7 @@ type SortOrder = {
   label: string
 }
 
-const SortSelector = ({ queryParams, onSelectOrder }: Props) => {
+const SortSelector = ({ gameQuery, onSelectOrder }: Props) => {
   const sortOrders: SortOrder[] = [
     { value: '-created', label: 'Date added' },
     { value: 'name', label: 'Name' },
@@ -21,7 +21,7 @@ const SortSelector = ({ queryParams, onSelectOrder }: Props) => {
     { value: '-rating', label: 'Average rating' },
   ] as const
 
-  const currentOrder = sortOrders.find(({ value }) => value === queryParams.ordering)
+  const currentOrder = sortOrders.find(({ value }) => value === gameQuery.ordering)
 
   return (
     <Menu>

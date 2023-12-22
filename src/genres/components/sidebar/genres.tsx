@@ -1,14 +1,14 @@
 import { Box, Button, HStack, Heading, Image, List, ListItem } from '@chakra-ui/react'
-import { GamesQueryParams } from '../../../common/types/games.types'
+import { Genre } from '../../../common/types/genres.type'
 import SidebarListSkeleton from '../../../components/skeletons/sidebar-list-skeleton'
 import { useAllGenres } from '../../hooks/get-all-genres.hook'
 
 type Props = {
-  queryParams: GamesQueryParams
-  handleGenreChange: (genre: number) => void
+  currentGenre?: Genre
+  onGenreChange: (genre: Genre) => void
 }
 
-const Genres = ({ queryParams, handleGenreChange }: Props) => {
+const Genres = ({ currentGenre, onGenreChange }: Props) => {
   const { isFetching, data } = useAllGenres()
 
   const skeletons = new Array(10).fill('')
@@ -38,14 +38,14 @@ const Genres = ({ queryParams, handleGenreChange }: Props) => {
                   />
                   <Button
                     variant="link"
-                    onClick={() => handleGenreChange(genre.id)}
+                    onClick={() => onGenreChange(genre)}
                     justifyContent="start"
                   >
                     <Box
                       as="span"
                       overflow="hidden"
                       textOverflow="ellipsis"
-                      fontWeight={+queryParams.genres! === genre.id ? 700 : 400}
+                      fontWeight={currentGenre?.id === genre.id ? 700 : 400}
                     >
                       {genre.name}
                     </Box>

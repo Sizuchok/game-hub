@@ -3,14 +3,14 @@ import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { useDebounce } from 'usehooks-ts'
-import { GamesQueryParams } from '../../../common/types/games.types'
+import { GameQuery } from '../../../common/types/games.types'
 
 type Props = {
-  queryParams: GamesQueryParams
+  gameQuery: GameQuery
   onSearch: (search: string) => void
 }
 
-const SearchBar = ({ queryParams, onSearch }: Props) => {
+const SearchBar = ({ gameQuery, onSearch }: Props) => {
   const [value, setValue] = useState<string>('')
   const [showValue, setShowValue] = useState<string>('')
   const debouncedValue = useDebounce<string>(value, 500)
@@ -20,8 +20,8 @@ const SearchBar = ({ queryParams, onSearch }: Props) => {
   }, [debouncedValue])
 
   useEffect(() => {
-    setShowValue(queryParams.search ?? '')
-  }, [queryParams.search])
+    setShowValue(gameQuery.search ?? '')
+  }, [gameQuery.search])
 
   return (
     <InputGroup>

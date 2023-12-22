@@ -12,8 +12,8 @@ export type Game = Prettify<RawgCore> & {
 
 export type GamesQueryParams = Prettify<RawgQueryParams> & {
   search?: string | null
-  parent_platforms?: string
-  genres?: string
+  parent_platforms?: string | number
+  genres?: string | number
   ordering: TwoWayGameSortOrder | null
 }
 

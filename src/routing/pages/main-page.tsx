@@ -1,48 +1,50 @@
 import { Box, Grid, GridItem, HStack, Show } from '@chakra-ui/react'
 import { useState } from 'react'
 import { LAYOUT_AREAS } from '../../common/theme/layout-areas.const'
-import { GamesQueryParams, TwoWayGameSortOrder } from '../../common/types/games.types'
+import { GameQuery, TwoWayGameSortOrder } from '../../common/types/games.types'
+import { Genre } from '../../common/types/genres.type'
+import { Platform } from '../../common/types/platform.type'
 import MainContainer from '../../components/layout/main-container'
 import NavBarContainer from '../../components/layout/nav-bar-container'
 import Logo from '../../components/nav-bar/logo'
 import ColorModeSwitch from '../../components/switch/color-mode-switch'
+import CurrentFiltersHeading from '../../game/components/filters/current-filters-heading'
 import PlatformSelector from '../../game/components/filters/platform-selector'
 import SearchBar from '../../game/components/filters/search-bar'
-import CurrentFiltersHeading from '../../game/components/filters/selected-filters-heading'
 import SortSelector from '../../game/components/filters/sort-selector'
 import GamesGrid from '../../game/components/games-grid'
 import Genres from '../../genres/components/sidebar/genres'
 
 export const MainPage = () => {
-  const [queryParams, setQueryParams] = useState<GamesQueryParams>({
+  const [gameQuery, setGameQuery] = useState<GameQuery>({
     ordering: '-added',
   })
 
-  const handleGenreChange = (genre: number) => {
-    setQueryParams({
-      ...queryParams,
-      genres: String(genre),
+  const handleGenreChange = (genre: Genre) => {
+    setGameQuery({
+      ...gameQuery,
+      genre,
     })
   }
 
-  const handlePlatformSelect = (platform: number) => {
-    setQueryParams({
-      ...queryParams,
-      parent_platforms: String(platform),
+  const handlePlatformSelect = (platform: Platform) => {
+    setGameQuery({
+      ...gameQuery,
+      platform,
     })
   }
 
   const handleSortOrderSelect = (order: TwoWayGameSortOrder) => {
-    setQueryParams({
-      ...queryParams,
+    setGameQuery({
+      ...gameQuery,
       ordering: order,
       search: null,
     })
   }
 
   const handleSearch = (search: string) => {
-    setQueryParams({
-      ...queryParams,
+    setGameQuery({
+      ...gameQuery,
       search,
       ordering: null,
     })
@@ -62,25 +64,28 @@ export const MainPage = () => {
       <GridItem area={LAYOUT_AREAS.nav}>
         <NavBarContainer>
           <Logo />
-          <SearchBar queryParams={queryParams} onSearch={handleSearch} />
+          <SearchBar gameQuery={gameQuery} onSearch={handleSearch} />
           <ColorModeSwitch />
         </NavBarContainer>
       </GridItem>
       <Show above="lg">
         <GridItem area={LAYOUT_AREAS.aside}>
           <Box as="aside" marginLeft={8} position={'sticky'} top={0}>
-            <Genres queryParams={queryParams} handleGenreChange={handleGenreChange} />
+            <Genres currentGenre={gameQuery.genre} onGenreChange={handleGenreChange} />
           </Box>
         </GridItem>
       </Show>
       <GridItem area={LAYOUT_AREAS.main}>
         <MainContainer>
-          <CurrentFiltersHeading queryParams={queryParams} />
+          <CurrentFiltersHeading gameQuery={gameQuery} />
           <HStack my={6}>
-            <PlatformSelector onSelectPlatform={handlePlatformSelect} queryParams={queryParams} />
-            <SortSelector queryParams={queryParams} onSelectOrder={handleSortOrderSelect} />
+            <PlatformSelector
+              onSelectPlatform={handlePlatformSelect}
+              currentPlatform={gameQuery.platform}
+            />
+            <SortSelector gameQuery={gameQuery} onSelectOrder={handleSortOrderSelect} />
           </HStack>
-          <GamesGrid queryParams={queryParams} />
+          <GamesGrid gameQuery={gameQuery} />
         </MainContainer>
       </GridItem>
     </Grid>
