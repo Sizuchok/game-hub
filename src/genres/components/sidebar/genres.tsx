@@ -23,20 +23,25 @@ const Genres = ({ handleGenreChange }: Props) => {
           },
         }}
       >
-        {genres.map(genre => (
-          <ListItem key={genre.id}>
-            <HStack>
-              <Image src={genre.image_background} boxSize={8} objectFit="cover" borderRadius="md" />
-              <Button variant="link" onClick={() => handleGenreChange(genre.slug)}>
-                <Box as="span" overflow="hidden" textOverflow="ellipsis" fontWeight={400}>
-                  {genre.name}
-                </Box>
-              </Button>
-            </HStack>
-          </ListItem>
-        ))}
-
-        {isFetching && skeletons.map((_, index) => <SidebarListSkeleton key={index} />)}
+        {isFetching
+          ? skeletons.map((_, index) => <SidebarListSkeleton key={index} />)
+          : genres.map(genre => (
+              <ListItem key={genre.id}>
+                <HStack>
+                  <Image
+                    src={genre.image_background}
+                    boxSize={8}
+                    objectFit="cover"
+                    borderRadius="md"
+                  />
+                  <Button variant="link" onClick={() => handleGenreChange(genre.slug)}>
+                    <Box as="span" overflow="hidden" textOverflow="ellipsis" fontWeight={400}>
+                      {genre.name}
+                    </Box>
+                  </Button>
+                </HStack>
+              </ListItem>
+            ))}
       </List>
     </Box>
   )

@@ -8,7 +8,7 @@ import { TfiAndroid } from 'react-icons/tfi'
 import { Platform } from '../../common/types/platform.type'
 
 type Props = {
-  platforms: Platform[]
+  platforms: Platform[] | undefined
 }
 
 type IconsMap = {
@@ -40,13 +40,17 @@ const GamePlatforms = ({ platforms }: Props) => {
         },
       }}
     >
-      {platforms.map(platform => (
-        <Icon
-          as={iconsMap[platform.slug] ?? FaQuestionCircle}
-          color={'gray.400'}
-          key={platform.id}
-        />
-      ))}
+      {platforms ? (
+        platforms.map(platform => (
+          <Icon
+            as={iconsMap[platform.slug] ?? FaQuestionCircle}
+            color={'gray.400'}
+            key={platform.id}
+          />
+        ))
+      ) : (
+        <Icon as={FaQuestionCircle} color={'gray.400'} />
+      )}
     </HStack>
   )
 }

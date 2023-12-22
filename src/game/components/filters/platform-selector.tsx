@@ -12,7 +12,7 @@ const PlatformSelector = ({ queryParams, onSelectPlatform }: Props) => {
   const { data, isError } = useAllPlatforms()
   const platforms = data?.results ?? []
 
-  const currentPlatform = platforms.find(({ id }) => id === Number(queryParams.platforms))
+  const currentPlatform = platforms.find(({ id }) => id === Number(queryParams.parent_platforms))
 
   if (isError) return null
 

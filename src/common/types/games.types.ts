@@ -6,15 +6,15 @@ import { Prettify } from './prettify.type'
 export type Game = Prettify<RawgCore> & {
   description: string
   background_image: string | null
-  parent_platforms: { platform: Platform }[]
+  parent_platforms?: { platform: Platform }[]
   metacritic: number
 }
 
 export type GamesQueryParams = Prettify<RawgQueryParams> & {
-  search?: string
-  platforms?: string
+  search?: string | null
+  parent_platforms?: string
   genres?: string
-  ordering: TwoWayGameSortOrder
+  ordering: TwoWayGameSortOrder | null
 }
 
 export type GameQuery = {
