@@ -17,7 +17,7 @@ export type GamesQueryParams = Prettify<RawgQueryParams> & {
   ordering: TwoWayGameSortOrder | null
 }
 
-export type GameQuery = {
+export type GameQuery = Prettify<Pick<GamesQueryParams, 'ordering' | 'search'>> & {
   platform?: Platform
   genre?: Genre
 }

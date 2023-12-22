@@ -5,7 +5,7 @@ import { useAllGenres } from '../../hooks/get-all-genres.hook'
 
 type Props = {
   queryParams: GamesQueryParams
-  handleGenreChange: (genres: string) => void
+  handleGenreChange: (genre: number) => void
 }
 
 const Genres = ({ queryParams, handleGenreChange }: Props) => {
@@ -38,14 +38,14 @@ const Genres = ({ queryParams, handleGenreChange }: Props) => {
                   />
                   <Button
                     variant="link"
-                    onClick={() => handleGenreChange(genre.slug)}
+                    onClick={() => handleGenreChange(genre.id)}
                     justifyContent="start"
                   >
                     <Box
                       as="span"
                       overflow="hidden"
                       textOverflow="ellipsis"
-                      fontWeight={queryParams.genres === genre.slug ? 700 : 400}
+                      fontWeight={+queryParams.genres! === genre.id ? 700 : 400}
                     >
                       {genre.name}
                     </Box>

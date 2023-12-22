@@ -8,6 +8,7 @@ import Logo from '../../components/nav-bar/logo'
 import ColorModeSwitch from '../../components/switch/color-mode-switch'
 import PlatformSelector from '../../game/components/filters/platform-selector'
 import SearchBar from '../../game/components/filters/search-bar'
+import CurrentFiltersHeading from '../../game/components/filters/selected-filters-heading'
 import SortSelector from '../../game/components/filters/sort-selector'
 import GamesGrid from '../../game/components/games-grid'
 import Genres from '../../genres/components/sidebar/genres'
@@ -17,10 +18,10 @@ export const MainPage = () => {
     ordering: '-added',
   })
 
-  const handleGenreChange = (genres: string) => {
+  const handleGenreChange = (genre: number) => {
     setQueryParams({
       ...queryParams,
-      genres,
+      genres: String(genre),
     })
   }
 
@@ -74,6 +75,7 @@ export const MainPage = () => {
       </Show>
       <GridItem area={LAYOUT_AREAS.main}>
         <MainContainer>
+          <CurrentFiltersHeading queryParams={queryParams} />
           <HStack my={6}>
             <PlatformSelector onSelectPlatform={handlePlatformSelect} queryParams={queryParams} />
             <SortSelector queryParams={queryParams} onSelectOrder={handleSortOrderSelect} />
