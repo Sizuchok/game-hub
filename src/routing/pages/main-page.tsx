@@ -1,5 +1,19 @@
-import { Box, Grid, GridItem, HStack, Show } from '@chakra-ui/react'
-import { useState } from 'react'
+import {
+  Box,
+  Grid,
+  GridItem,
+  HStack,
+  IconButton,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalOverlay,
+  useBreakpointValue,
+  useDisclosure,
+} from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
+import { LuMenuSquare } from 'react-icons/lu'
 import { LAYOUT_AREAS } from '../../common/theme/layout-areas.const'
 import { GameQuery, TwoWayGameSortOrder } from '../../common/types/games.types'
 import { Genre } from '../../common/types/genres.type'
@@ -16,6 +30,13 @@ import GamesGrid from '../../game/components/games-grid'
 import Genres from '../../genres/components/sidebar/genres'
 
 export const MainPage = () => {
+  const { isOpen, onClose, onOpen } = useDisclosure()
+
+  const isMobile = useBreakpointValue({
+    base: true,
+    lg: false,
+  })
+
   const [gameQuery, setGameQuery] = useState<GameQuery>({
     ordering: '-added',
   })
@@ -50,6 +71,12 @@ export const MainPage = () => {
     })
   }
 
+  useEffect(() => {
+    if (isOpen) {
+      onClose()
+    }
+  }, [gameQuery.genre])
+
   return (
     <Grid
       gridTemplateAreas={{
@@ -60,6 +87,8 @@ export const MainPage = () => {
         base: '1fr',
         lg: '200px 1fr',
       }}
+      position={'relative'}
+      pb={8}
     >
       <GridItem area={LAYOUT_AREAS.nav}>
         <NavBarContainer>
@@ -68,13 +97,41 @@ export const MainPage = () => {
           <ColorModeSwitch />
         </NavBarContainer>
       </GridItem>
-      <Show above="lg">
-        <GridItem area={LAYOUT_AREAS.aside}>
-          <Box as="aside" marginLeft={8} position={'sticky'} top={0}>
+      <GridItem area={LAYOUT_AREAS.aside}>
+        {isMobile ? (
+          <>
+            <IconButton
+              isRound
+              variant="solid"
+              icon={<LuMenuSquare />}
+              boxSize="3.3rem"
+              aria-label="Sidebar"
+              colorScheme="green"
+              fontSize="2xl"
+              position="fixed"
+              bottom={10}
+              right={10}
+              zIndex={999}
+              onClick={onOpen}
+            />
+            <Modal isOpen={isOpen} onClose={onClose} size={'full'}>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalCloseButton />
+                <ModalBody>
+                  <Box as="aside">
+                    <Genres currentGenre={gameQuery.genre} onGenreChange={handleGenreChange} />
+                  </Box>
+                </ModalBody>
+              </ModalContent>
+            </Modal>
+          </>
+        ) : (
+          <Box as="aside" marginLeft={8}>
             <Genres currentGenre={gameQuery.genre} onGenreChange={handleGenreChange} />
           </Box>
-        </GridItem>
-      </Show>
+        )}
+      </GridItem>
       <GridItem area={LAYOUT_AREAS.main}>
         <MainContainer>
           <CurrentFiltersHeading gameQuery={gameQuery} />

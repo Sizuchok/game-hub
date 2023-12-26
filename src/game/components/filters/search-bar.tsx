@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { useDebounce } from 'usehooks-ts'
 import { GameQuery } from '../../../common/types/games.types'
@@ -12,15 +11,20 @@ type Props = {
 
 const SearchBar = ({ gameQuery, onSearch }: Props) => {
   const [value, setValue] = useState<string>('')
-  const [showValue, setShowValue] = useState<string>('')
+  const [displayValue, setDisplayValue] = useState<string>('')
   const debouncedValue = useDebounce<string>(value, 500)
+
+  const handleInputChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+    setValue(value)
+    setDisplayValue(value)
+  }
 
   useEffect(() => {
     onSearch(debouncedValue)
   }, [debouncedValue])
 
   useEffect(() => {
-    setShowValue(gameQuery.search ?? '')
+    setDisplayValue(gameQuery.search ?? '')
   }, [gameQuery.search])
 
   return (
@@ -31,11 +35,8 @@ const SearchBar = ({ gameQuery, onSearch }: Props) => {
         type="search"
         placeholder="Wrote of tutls..."
         borderRadius="3xl"
-        value={showValue}
-        onChange={event => {
-          setValue(event.target.value)
-          setShowValue(event.target.value)
-        }}
+        value={displayValue}
+        onChange={handleInputChange}
       />
     </InputGroup>
   )
