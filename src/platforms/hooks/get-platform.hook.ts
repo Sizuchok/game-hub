@@ -1,4 +1,4 @@
-import { QUERY_KEYS_PLATFORMS } from '../../common/const/app-keys.const'
+import { QUERY_KEYS } from '../../common/const/app-keys.const'
 import {
   GetFromQueryCacheArgs,
   useGetFromQueryCache,
@@ -6,4 +6,4 @@ import {
 import { Platform } from '../../common/types/platform.type'
 
 export const useGetPlatform = (id: GetFromQueryCacheArgs['1']) =>
-  useGetFromQueryCache<Platform>(QUERY_KEYS_PLATFORMS.getAll, id)
+  useGetFromQueryCache<Platform>(QUERY_KEYS.PLATFORMS.GET_ALL, id)

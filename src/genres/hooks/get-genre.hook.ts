@@ -1,4 +1,4 @@
-import { QUERY_KEYS_GENRES } from '../../common/const/app-keys.const'
+import { QUERY_KEYS } from '../../common/const/app-keys.const'
 import {
   GetFromQueryCacheArgs,
   useGetFromQueryCache,
@@ -7,7 +7,7 @@ import { Genre } from '../../common/types/genres.type'
 import { useAllGenres } from './get-all-genres.hook'
 
 export const useGetGenre = (id: GetFromQueryCacheArgs['1']) =>
-  useGetFromQueryCache<Genre>(QUERY_KEYS_GENRES.getAll, id)
+  useGetFromQueryCache<Genre>(QUERY_KEYS.GENRES.GET_ALL, id)
 
 export const useGetGenre2 = (id: number | undefined) => {
   const { data } = useAllGenres()

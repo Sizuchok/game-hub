@@ -1,22 +1,28 @@
 export const RAWG_KEYS = {
-  key: 'a200fe5f809548898491ed1594ba008b',
-  url: 'https://api.rawg.io/api',
+  KEY: 'a200fe5f809548898491ed1594ba008b',
+  URL: 'https://api.rawg.io/api',
 } as const
 
 export const RAWG_ENDPOINTS = {
-  games: 'games',
-  genres: 'genres',
-  parentPlatforms: 'platforms/lists/parents',
+  GAMES: 'games',
+  GENRES: 'genres',
+  PARENT_PLATFORMS: 'platforms/lists/parents',
 } as const
 
-export const QUERY_KEYS_GAMES = {
-  getAll: 'get-all-games',
+const QUERY_KEYS_GAMES = {
+  GET_ALL: 'get-all-games',
 } as const
 
-export const QUERY_KEYS_GENRES = {
-  getAll: 'get-all-genres',
+const QUERY_KEYS_GENRES = {
+  GET_ALL: 'get-all-genres',
 } as const
 
-export const QUERY_KEYS_PLATFORMS = {
-  getAll: 'get-all-platforms',
+const QUERY_KEYS_PLATFORMS = {
+  GET_ALL: 'get-all-platforms',
+} as const
+
+export const QUERY_KEYS = {
+  GAMES: QUERY_KEYS_GAMES,
+  GENRES: QUERY_KEYS_GENRES,
+  PLATFORMS: QUERY_KEYS_PLATFORMS,
 } as const

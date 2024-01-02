@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { QUERY_KEYS_GAMES } from '../../common/const/app-keys.const'
+import { QUERY_KEYS } from '../../common/const/app-keys.const'
 import { GameQuery, GamesQueryParams } from '../../common/types/games.types'
 import { http } from '../../services'
 
@@ -11,7 +11,7 @@ export const useGetInfiniteGames = ({ genre, platform, ...rest }: GameQuery) => 
   }
 
   return useInfiniteQuery({
-    queryKey: [QUERY_KEYS_GAMES.getAll, queryParams],
+    queryKey: [QUERY_KEYS.GAMES.GET_ALL, queryParams],
     queryFn: async ({ pageParam: page = 1 }) =>
       http.games.get({
         params: {
