@@ -1,4 +1,4 @@
-import { SimpleGrid } from '@chakra-ui/react'
+import { SimpleGrid, useBreakpointValue } from '@chakra-ui/react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { GameQuery } from '../../common/types/games.types'
 import { useGetInfiniteGames } from '../hooks/get-infinite-games.hook'
@@ -12,7 +12,16 @@ type Props = {
 const GamesGrid = ({ gameQuery }: Props) => {
   const { data, isFetching, hasNextPage, fetchNextPage } = useGetInfiniteGames(gameQuery)
   const games = data?.pages.flatMap(page => page.results) ?? []
-  const skeletons = new Array(15).fill('')
+
+  const skeletonsAmount = useBreakpointValue({
+    sm: 12,
+    md: 15,
+    xl: 16,
+    '2xl': 16,
+    '3xl': 15,
+  })
+
+  const skeletons = new Array(skeletonsAmount ?? 15).fill('')
 
   return (
     <InfiniteScroll dataLength={games.length} hasMore={hasNextPage} next={fetchNextPage} loader>
