@@ -1,7 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { QUERY_KEYS_GAMES } from '../../common/const/app-keys.const'
-import { RawgRes } from '../../common/types/base.types'
-import { Game, GameQuery, GamesQueryParams } from '../../common/types/games.types'
+import { GameQuery, GamesQueryParams } from '../../common/types/games.types'
 import { http } from '../../services'
 
 export const useGetInfiniteGames = ({ genre, platform, ...rest }: GameQuery) => {
@@ -14,7 +13,7 @@ export const useGetInfiniteGames = ({ genre, platform, ...rest }: GameQuery) => 
   return useInfiniteQuery({
     queryKey: [QUERY_KEYS_GAMES.getAll, queryParams],
     queryFn: async ({ pageParam: page = 1 }) =>
-      http.games.get<RawgRes<Game>>({
+      http.games.get({
         params: {
           ...queryParams,
           page,
