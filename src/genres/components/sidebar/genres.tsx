@@ -1,15 +1,17 @@
 import { Box, Button, HStack, Heading, Image, List, ListItem } from '@chakra-ui/react'
-import { Genre } from '../../../common/types/genres.type'
 import SidebarListSkeleton from '../../../components/skeletons/sidebar-list-skeleton'
 import { useAllGenres } from '../../hooks/get-all-genres.hook'
+import { useGetGenre } from '../../hooks/get-genre.hook'
 
 type Props = {
-  currentGenre?: Genre
-  onGenreChange: (genre: Genre) => void
+  currentGenreId: number | undefined
+  onGenreChange: (genre: number) => void
 }
 
-const Genres = ({ currentGenre, onGenreChange }: Props) => {
+const Genres = ({ currentGenreId, onGenreChange }: Props) => {
   const { isFetching, data } = useAllGenres()
+
+  const currentGenre = useGetGenre(currentGenreId)
 
   const skeletons = new Array(10).fill('')
   const genres = data?.results ?? []
@@ -38,7 +40,7 @@ const Genres = ({ currentGenre, onGenreChange }: Props) => {
                   />
                   <Button
                     variant="link"
-                    onClick={() => onGenreChange(genre)}
+                    onClick={() => onGenreChange(genre.id)}
                     justifyContent="start"
                   >
                     <Box

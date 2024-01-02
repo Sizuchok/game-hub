@@ -1,5 +1,4 @@
 import { RawgCore, RawgQueryParams } from './base.types'
-import { Genre } from './genres.type'
 import { Platform } from './platform.type'
 import { Prettify } from './prettify.type'
 
@@ -18,10 +17,12 @@ export type GamesQueryParams = Prettify<RawgQueryParams> & {
   ordering: TwoWayGameSortOrder | null
 }
 
-export type GameQuery = Prettify<Pick<GamesQueryParams, 'ordering' | 'search'>> & {
-  platform?: Platform
-  genre?: Genre
-}
+export type GameQuery = Prettify<
+  Pick<GamesQueryParams, 'ordering' | 'search'> & {
+    genre?: number
+    platform?: number
+  }
+>
 
 type GameSortOrder = 'name' | 'released' | 'added' | 'created' | 'updated' | 'rating' | 'metacritic'
 

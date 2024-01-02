@@ -16,18 +16,16 @@ import { useEffect, useState } from 'react'
 import { LuMenuSquare } from 'react-icons/lu'
 import { LAYOUT_AREAS } from '../../common/theme/layout-areas.const'
 import { GameQuery, TwoWayGameSortOrder } from '../../common/types/games.types'
-import { Genre } from '../../common/types/genres.type'
-import { Platform } from '../../common/types/platform.type'
 import MainContainer from '../../components/layout/main-container'
 import NavBarContainer from '../../components/layout/nav-bar-container'
 import Logo from '../../components/nav-bar/logo'
 import ColorModeSwitch from '../../components/switch/color-mode-switch'
 import CurrentFiltersHeading from '../../game/components/filters/current-filters-heading'
-import PlatformSelector from '../../game/components/filters/platform-selector'
 import SearchBar from '../../game/components/filters/search-bar'
 import SortSelector from '../../game/components/filters/sort-selector'
 import GamesGrid from '../../game/components/games-grid'
 import Genres from '../../genres/components/sidebar/genres'
+import PlatformSelector from '../../platforms/components/platform-selector'
 
 export const MainPage = () => {
   const { isOpen, onClose, onOpen } = useDisclosure()
@@ -41,14 +39,14 @@ export const MainPage = () => {
     ordering: '-added',
   })
 
-  const handleGenreChange = (genre: Genre) => {
+  const handleGenreChange = (genre: number) => {
     setGameQuery({
       ...gameQuery,
       genre,
     })
   }
 
-  const handlePlatformSelect = (platform: Platform) => {
+  const handlePlatformSelect = (platform: number) => {
     setGameQuery({
       ...gameQuery,
       platform,
@@ -120,7 +118,7 @@ export const MainPage = () => {
                 <ModalCloseButton />
                 <ModalBody>
                   <Box as="aside">
-                    <Genres currentGenre={gameQuery.genre} onGenreChange={handleGenreChange} />
+                    <Genres currentGenreId={gameQuery.genre} onGenreChange={handleGenreChange} />
                   </Box>
                 </ModalBody>
               </ModalContent>
@@ -128,7 +126,7 @@ export const MainPage = () => {
           </>
         ) : (
           <Box as="aside" marginLeft={8}>
-            <Genres currentGenre={gameQuery.genre} onGenreChange={handleGenreChange} />
+            <Genres currentGenreId={gameQuery.genre} onGenreChange={handleGenreChange} />
           </Box>
         )}
       </GridItem>
@@ -137,8 +135,8 @@ export const MainPage = () => {
           <CurrentFiltersHeading gameQuery={gameQuery} />
           <HStack my={6}>
             <PlatformSelector
+              currentPlatformId={gameQuery.platform}
               onSelectPlatform={handlePlatformSelect}
-              currentPlatform={gameQuery.platform}
             />
             <SortSelector gameQuery={gameQuery} onSelectOrder={handleSortOrderSelect} />
           </HStack>

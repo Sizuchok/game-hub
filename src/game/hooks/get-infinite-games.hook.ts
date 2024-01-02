@@ -6,8 +6,8 @@ import { http } from '../../services'
 export const useGetInfiniteGames = ({ genre, platform, ...rest }: GameQuery) => {
   const queryParams: GamesQueryParams = {
     ...rest,
-    genres: genre?.id,
-    parent_platforms: platform?.id,
+    genres: genre,
+    parent_platforms: platform,
   }
 
   return useInfiniteQuery({
