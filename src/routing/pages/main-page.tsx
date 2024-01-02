@@ -114,7 +114,7 @@ export const MainPage = () => {
               zIndex={999}
               onClick={onOpen}
             />
-            <Modal isOpen={isOpen} onClose={onClose} size={'full'}>
+            <Modal isOpen={isOpen} onClose={onClose} size="full">
               <ModalOverlay />
               <ModalContent>
                 <ModalCloseButton />
