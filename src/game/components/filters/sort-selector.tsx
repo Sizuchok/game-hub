@@ -1,18 +1,19 @@
 import { Box, Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import { BsChevronDown } from 'react-icons/bs'
-import { GameQuery, TwoWayGameSortOrder } from '../../../common/types/games.types'
-
-type Props = {
-  gameQuery: GameQuery
-  onSelectOrder: (order: TwoWayGameSortOrder) => void
-}
+import { useShallow } from 'zustand/react/shallow'
+import { TwoWayGameSortOrder } from '../../../common/types/games.types'
+import { useGameQuery } from '../../../state/game-query-store'
 
 type SortOrder = {
   value: TwoWayGameSortOrder
   label: string
 }
 
-const SortSelector = ({ gameQuery, onSelectOrder }: Props) => {
+const SortSelector = () => {
+  const { ordering, setSortOrder } = useGameQuery(
+    useShallow(state => ({ ordering: state.gameQuery.ordering, setSortOrder: state.setSortOder })),
+  )
+
   const sortOrders: SortOrder[] = [
     { value: '-created', label: 'Date added' },
     { value: 'name', label: 'Name' },
@@ -21,7 +22,8 @@ const SortSelector = ({ gameQuery, onSelectOrder }: Props) => {
     { value: '-rating', label: 'Average rating' },
   ] as const
 
-  const currentOrder = sortOrders.find(({ value }) => value === gameQuery.ordering)
+  const currentOrder = sortOrders.find(({ value }) => value === ordering)
+  console.log(ordering)
 
   return (
     <Menu>
@@ -31,7 +33,7 @@ const SortSelector = ({ gameQuery, onSelectOrder }: Props) => {
       </MenuButton>
       <MenuList fontSize={'sm'} fontWeight={400}>
         {sortOrders.map(order => (
-          <MenuItem onClick={() => onSelectOrder(order.value)} key={order.value}>
+          <MenuItem onClick={() => setSortOrder(order.value)} key={order.value}>
             {order.label}
           </MenuItem>
         ))}

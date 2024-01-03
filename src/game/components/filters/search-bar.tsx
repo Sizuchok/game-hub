@@ -2,17 +2,17 @@ import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { useDebounce } from 'usehooks-ts'
-import { GameQuery } from '../../../common/types/games.types'
+import { useShallow } from 'zustand/react/shallow'
+import { useGameQuery } from '../../../state/game-query-store'
 
-type Props = {
-  gameQuery: GameQuery
-  onSearch: (search: string) => void
-}
+const SearchBar = () => {
+  const [value, setValue] = useState<string | undefined>(undefined)
+  const [displayValue, setDisplayValue] = useState<string | undefined>('')
+  const debouncedValue = useDebounce<string | undefined>(value, 500)
 
-const SearchBar = ({ gameQuery, onSearch }: Props) => {
-  const [value, setValue] = useState<string>('')
-  const [displayValue, setDisplayValue] = useState<string>('')
-  const debouncedValue = useDebounce<string>(value, 500)
+  const { search, setSearch } = useGameQuery(
+    useShallow(state => ({ setSearch: state.setSearchText, search: state.gameQuery.search })),
+  )
 
   const handleInputChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setValue(value)
@@ -20,12 +20,12 @@ const SearchBar = ({ gameQuery, onSearch }: Props) => {
   }
 
   useEffect(() => {
-    onSearch(debouncedValue)
+    if (value != null) setSearch(debouncedValue)
   }, [debouncedValue])
 
   useEffect(() => {
-    setDisplayValue(gameQuery.search ?? '')
-  }, [gameQuery.search])
+    setDisplayValue(search ?? '')
+  }, [search])
 
   return (
     <InputGroup>

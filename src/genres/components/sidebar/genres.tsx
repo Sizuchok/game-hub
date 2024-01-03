@@ -1,14 +1,14 @@
 import { Box, Button, HStack, Heading, Image, List, ListItem } from '@chakra-ui/react'
+import { useShallow } from 'zustand/react/shallow'
 import SidebarListSkeleton from '../../../components/skeletons/sidebar-list-skeleton'
+import { useGameQuery } from '../../../state/game-query-store'
 import { useAllGenres } from '../../hooks/get-all-genres.hook'
 import { useGetGenre } from '../../hooks/get-genre.hook'
 
-type Props = {
-  currentGenreId: number | undefined
-  onGenreChange: (genre: number) => void
-}
-
-const Genres = ({ currentGenreId, onGenreChange }: Props) => {
+const Genres = () => {
+  const { currentGenreId, setGenreId } = useGameQuery(
+    useShallow(state => ({ currentGenreId: state.gameQuery.genre, setGenreId: state.setGenreId })),
+  )
   const { isFetching, data } = useAllGenres()
 
   const currentGenre = useGetGenre(currentGenreId)
@@ -40,7 +40,7 @@ const Genres = ({ currentGenreId, onGenreChange }: Props) => {
                   />
                   <Button
                     variant="link"
-                    onClick={() => onGenreChange(genre.id)}
+                    onClick={() => setGenreId(genre.id)}
                     justifyContent="start"
                   >
                     <Box

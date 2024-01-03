@@ -12,10 +12,9 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { LuMenuSquare } from 'react-icons/lu'
 import { LAYOUT_AREAS } from '../../common/theme/layout-areas.const'
-import { GameQuery, TwoWayGameSortOrder } from '../../common/types/games.types'
 import MainContainer from '../../components/layout/main-container'
 import NavBarContainer from '../../components/layout/nav-bar-container'
 import Logo from '../../components/nav-bar/logo'
@@ -26,8 +25,11 @@ import SortSelector from '../../game/components/filters/sort-selector'
 import GamesGrid from '../../game/components/games-grid'
 import Genres from '../../genres/components/sidebar/genres'
 import PlatformSelector from '../../platforms/components/platform-selector'
+import { useGameQuery } from '../../state/game-query-store'
 
 export const MainPage = () => {
+  const currentGenre = useGameQuery(state => state.gameQuery.genre)
+
   const { isOpen, onClose, onOpen } = useDisclosure()
 
   const isMobile = useBreakpointValue({
@@ -35,45 +37,11 @@ export const MainPage = () => {
     lg: false,
   })
 
-  const [gameQuery, setGameQuery] = useState<GameQuery>({
-    ordering: '-added',
-  })
-
-  const handleGenreChange = (genre: number) => {
-    setGameQuery({
-      ...gameQuery,
-      genre,
-    })
-  }
-
-  const handlePlatformSelect = (platform: number) => {
-    setGameQuery({
-      ...gameQuery,
-      platform,
-    })
-  }
-
-  const handleSortOrderSelect = (order: TwoWayGameSortOrder) => {
-    setGameQuery({
-      ...gameQuery,
-      ordering: order,
-      search: null,
-    })
-  }
-
-  const handleSearch = (search: string) => {
-    setGameQuery({
-      ...gameQuery,
-      search,
-      ordering: null,
-    })
-  }
-
   useEffect(() => {
     if (isOpen) {
       onClose()
     }
-  }, [gameQuery.genre])
+  }, [currentGenre])
 
   return (
     <Grid
@@ -91,7 +59,7 @@ export const MainPage = () => {
       <GridItem area={LAYOUT_AREAS.nav}>
         <NavBarContainer>
           <Logo />
-          <SearchBar gameQuery={gameQuery} onSearch={handleSearch} />
+          <SearchBar />
           <ColorModeSwitch />
         </NavBarContainer>
       </GridItem>
@@ -118,7 +86,7 @@ export const MainPage = () => {
                 <ModalCloseButton />
                 <ModalBody>
                   <Box as="aside">
-                    <Genres currentGenreId={gameQuery.genre} onGenreChange={handleGenreChange} />
+                    <Genres />
                   </Box>
                 </ModalBody>
               </ModalContent>
@@ -126,21 +94,18 @@ export const MainPage = () => {
           </>
         ) : (
           <Box as="aside" marginLeft={8}>
-            <Genres currentGenreId={gameQuery.genre} onGenreChange={handleGenreChange} />
+            <Genres />
           </Box>
         )}
       </GridItem>
       <GridItem area={LAYOUT_AREAS.main}>
         <MainContainer>
-          <CurrentFiltersHeading gameQuery={gameQuery} />
+          <CurrentFiltersHeading />
           <HStack my={6}>
-            <PlatformSelector
-              currentPlatformId={gameQuery.platform}
-              onSelectPlatform={handlePlatformSelect}
-            />
-            <SortSelector gameQuery={gameQuery} onSelectOrder={handleSortOrderSelect} />
+            <PlatformSelector />
+            <SortSelector />
           </HStack>
-          <GamesGrid gameQuery={gameQuery} />
+          <GamesGrid />
         </MainContainer>
       </GridItem>
     </Grid>

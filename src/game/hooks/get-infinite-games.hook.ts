@@ -1,9 +1,12 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { QUERY_KEYS } from '../../common/const/app-keys.const'
-import { GameQuery, GamesQueryParams } from '../../common/types/games.types'
+import { GamesQueryParams } from '../../common/types/games.types'
 import { http } from '../../services'
+import { useGameQuery } from '../../state/game-query-store'
 
-export const useGetInfiniteGames = ({ genre, platform, ...rest }: GameQuery) => {
+export const useGetInfiniteGames = () => {
+  const { genre, platform, ...rest } = useGameQuery(state => state.gameQuery)
+
   const queryParams: GamesQueryParams = {
     ...rest,
     genres: genre,
