@@ -1,7 +1,7 @@
 import { Box, Button, HStack, Heading, Image, List, ListItem } from '@chakra-ui/react'
 import { useShallow } from 'zustand/react/shallow'
 import { useAllGenres } from '../../genres/hooks/get-all-genres.hook'
-import { useGetGenre } from '../../genres/hooks/get-genre.hook'
+import { useCachedGenre } from '../../genres/hooks/get-genre.hook'
 import { useGameQuery } from '../../state/game-query-store'
 import SidebarListSkeleton from '../skeletons/sidebar-list-skeleton'
 
@@ -11,7 +11,7 @@ const Genres = () => {
   )
   const { isFetching, data } = useAllGenres()
 
-  const currentGenre = useGetGenre(currentGenreId)
+  const currentGenre = useCachedGenre(currentGenreId)
 
   const skeletons = new Array(10).fill('')
   const genres = data?.results ?? []

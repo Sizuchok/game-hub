@@ -6,7 +6,7 @@ export const useAllGenres = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GENRES.GET_ALL],
     queryFn: async () =>
-      http.genres.get({
+      http.genres.getAll({
         params: { page_size: 10 },
       }),
   })

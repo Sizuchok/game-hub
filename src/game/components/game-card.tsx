@@ -1,4 +1,5 @@
 import { Box, CardBody, HStack, Heading, Image } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 import backgroundPlaceholder from '../../assets/game-backgroud-image-placeholder.jpg'
 import { Game } from '../../common/types/games.types'
 import { getCroppedImageUrl } from '../../services/utils/get-croppod-image-url.util'
@@ -17,7 +18,7 @@ const GameCard = ({ game }: Props) => {
   return (
     <StyledGameCard
       _hover={{
-        transform: 'scale(1.03)',
+        transform: 'scale(1.02)',
         transition: 'all .3s',
       }}
       transform="scale(1)"
@@ -34,7 +35,9 @@ const GameCard = ({ game }: Props) => {
             <GamePlatforms platforms={platforms} />
             <CriticScore score={game.metacritic} />
           </HStack>
-          <Heading fontSize="2xl">{game.name}</Heading>
+          <Heading fontSize="2xl">
+            <Link to={`games/${game.slug}`}>{game.name}</Link>
+          </Heading>
           <RatingIcon rating={game.rating_top} />
         </Box>
       </CardBody>

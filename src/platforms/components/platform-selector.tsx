@@ -3,7 +3,7 @@ import { BsChevronDown } from 'react-icons/bs'
 import { useShallow } from 'zustand/react/shallow'
 import { useGameQuery } from '../../state/game-query-store'
 import { useAllPlatforms } from '../hooks/get-all-platforms.hook'
-import { useGetPlatform } from '../hooks/get-platform.hook'
+import { useCachedPlatform } from '../hooks/get-platform.hook'
 
 const PlatformSelector = () => {
   const { currentPlatformId, setPlatfromId } = useGameQuery(
@@ -16,7 +16,7 @@ const PlatformSelector = () => {
   const { data, isError } = useAllPlatforms()
   const platforms = data?.results ?? []
 
-  const currentPlatform = useGetPlatform(currentPlatformId)
+  const currentPlatform = useCachedPlatform(currentPlatformId)
 
   if (isError) return null
 

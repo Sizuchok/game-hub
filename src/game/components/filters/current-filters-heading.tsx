@@ -1,15 +1,15 @@
 import { Heading } from '@chakra-ui/react'
 import { useShallow } from 'zustand/react/shallow'
-import { useGetGenre } from '../../../genres/hooks/get-genre.hook'
-import { useGetPlatform } from '../../../platforms/hooks/get-platform.hook'
+import { useCachedGenre } from '../../../genres/hooks/get-genre.hook'
+import { useCachedPlatform } from '../../../platforms/hooks/get-platform.hook'
 import { useGameQuery } from '../../../state/game-query-store'
 
 const CurrentFiltersHeading = () => {
   const { genreId, platformId } = useGameQuery(
     useShallow(state => ({ platformId: state.gameQuery.platform, genreId: state.gameQuery.genre })),
   )
-  const platform = useGetPlatform(platformId)
-  const genre = useGetGenre(genreId)
+  const platform = useCachedPlatform(platformId)
+  const genre = useCachedGenre(genreId)
 
   const heading = `${platform?.name ?? ''} ${genre?.name ?? ''} Games`
 

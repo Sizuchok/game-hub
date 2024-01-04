@@ -4,6 +4,7 @@ import { Prettify } from './prettify.type'
 
 export type Game = Prettify<RawgCore> & {
   description: string
+  description_raw: string
   background_image: string | null
   parent_platforms?: { platform: Platform }[]
   metacritic: number

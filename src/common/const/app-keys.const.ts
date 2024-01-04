@@ -11,6 +11,7 @@ export const RAWG_ENDPOINTS = {
 
 const QUERY_KEYS_GAMES = {
   GET_ALL: 'get-all-games',
+  GET_ONE: 'get-one-game',
 } as const
 
 const QUERY_KEYS_GENRES = {

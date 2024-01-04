@@ -16,7 +16,7 @@ export const useGetInfiniteGames = () => {
   return useInfiniteQuery({
     queryKey: [QUERY_KEYS.GAMES.GET_ALL, queryParams],
     queryFn: async ({ pageParam: page = 1 }) =>
-      http.games.get({
+      http.games.getAll({
         params: {
           ...queryParams,
           page,
