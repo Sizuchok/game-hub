@@ -15,7 +15,14 @@ const GameCard = ({ game }: Props) => {
   const platforms = game.parent_platforms?.map(({ platform }) => platform)
 
   return (
-    <StyledGameCard>
+    <StyledGameCard
+      _hover={{
+        transform: 'scale(1.03)',
+        transition: 'all .3s',
+      }}
+      transform="scale(1)"
+      transition="all .3s"
+    >
       <Image
         src={
           game.background_image ? getCroppedImageUrl(game.background_image) : backgroundPlaceholder
