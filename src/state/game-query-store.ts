@@ -14,13 +14,49 @@ export const useGameQuery = create<GameQueryStore>(set => ({
     ordering: '-added',
   },
 
-  setSearchText: searchText =>
-    set(({ gameQuery }) => ({ gameQuery: { ...gameQuery, search: searchText, ordering: null } })),
+  setSearchText: searchText => {
+    const updater = ({ gameQuery }: GameQueryStore) => ({
+      gameQuery: {
+        ...gameQuery,
+        search: searchText,
+        ordering: null,
+      },
+    })
 
-  setGenreId: id => set(({ gameQuery }) => ({ gameQuery: { ...gameQuery, genre: id } })),
+    set(updater)
+  },
 
-  setPlatformId: id => set(({ gameQuery }) => ({ gameQuery: { ...gameQuery, platform: id } })),
+  setGenreId: id => {
+    const updater = ({ gameQuery }: GameQueryStore) => ({
+      gameQuery: {
+        ...gameQuery,
+        genre: id,
+      },
+    })
 
-  setSortOder: order =>
-    set(({ gameQuery }) => ({ gameQuery: { ...gameQuery, ordering: order, search: null } })),
+    set(updater)
+  },
+
+  setPlatformId: id => {
+    const updater = ({ gameQuery }: GameQueryStore) => ({
+      gameQuery: {
+        ...gameQuery,
+        platform: id,
+      },
+    })
+
+    set(updater)
+  },
+
+  setSortOder: order => {
+    const updater = ({ gameQuery }: GameQueryStore) => ({
+      gameQuery: {
+        ...gameQuery,
+        ordering: order,
+        search: null,
+      },
+    })
+
+    set(updater)
+  },
 }))
