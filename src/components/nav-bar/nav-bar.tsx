@@ -1,11 +1,9 @@
 import { HStack } from '@chakra-ui/react'
-import { ReactNode } from 'react'
+import ColorModeSwitch from '../switch/color-mode-switch'
+import Logo from './logo'
+import SearchBar from './search-bar'
 
-type Props = {
-  children: ReactNode
-}
-
-const NavBarContainer = ({ children }: Props) => {
+const NavBar = () => {
   return (
     <HStack
       paddingX={{
@@ -18,8 +16,10 @@ const NavBarContainer = ({ children }: Props) => {
         sm: 8,
       }}
     >
-      {children}
+      <Logo />
+      <SearchBar />
+      <ColorModeSwitch />
     </HStack>
   )
 }
-export default NavBarContainer
+export default NavBar

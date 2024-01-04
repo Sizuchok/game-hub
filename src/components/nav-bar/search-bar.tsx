@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { useDebounce } from 'usehooks-ts'
 import { useShallow } from 'zustand/react/shallow'
-import { useGameQuery } from '../../../state/game-query-store'
+import { useGameQuery } from '../../state/game-query-store'
 
 const SearchBar = () => {
   const [value, setValue] = useState<string | undefined>(undefined)

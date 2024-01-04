@@ -1,9 +1,9 @@
 import { Box, Button, HStack, Heading, Image, List, ListItem } from '@chakra-ui/react'
 import { useShallow } from 'zustand/react/shallow'
-import SidebarListSkeleton from '../../../components/skeletons/sidebar-list-skeleton'
-import { useGameQuery } from '../../../state/game-query-store'
-import { useAllGenres } from '../../hooks/get-all-genres.hook'
-import { useGetGenre } from '../../hooks/get-genre.hook'
+import { useAllGenres } from '../../genres/hooks/get-all-genres.hook'
+import { useGetGenre } from '../../genres/hooks/get-genre.hook'
+import { useGameQuery } from '../../state/game-query-store'
+import SidebarListSkeleton from '../skeletons/sidebar-list-skeleton'
 
 const Genres = () => {
   const { currentGenreId, setGenreId } = useGameQuery(
