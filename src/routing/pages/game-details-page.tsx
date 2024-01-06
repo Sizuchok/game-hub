@@ -1,12 +1,35 @@
+import { Box, Flex, Heading, Spinner } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
 import { GameDetailsParams } from '../../common/types/router-params.types'
+import ExpandableText from '../../components/util/expandable-text'
+import GameAttributes from '../../game/components/details-page/game-attributes'
 import { useGame } from '../../game/hooks/use-game.hook'
 
 const GameDetailsPage = () => {
   const { slug } = useParams() as GameDetailsParams
 
-  const { data: game } = useGame(slug)
+  const { data: game, isFetching, error } = useGame(slug)
 
-  return <div>{game?.description_raw}</div>
+  if (isFetching) {
+    return (
+      <Flex height={'100vh'}>
+        <Spinner size={'xl'} m={'auto'} />
+      </Flex>
+    )
+  }
+
+  if (error || !game) {
+    throw error
+  }
+
+  return (
+    <Box as="main" px={5}>
+      <Box mx={'auto'} maxW="980px">
+        <Heading fontSize={'6xl'}>{game.name}</Heading>
+        <ExpandableText text={game.description_raw} />
+        <GameAttributes game={game} />
+      </Box>
+    </Box>
+  )
 }
 export default GameDetailsPage
