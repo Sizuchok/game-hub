@@ -7,13 +7,13 @@ export class HttpService<TResponse = unknown> {
     this.endpoint = endpoint
   }
 
-  async getAll(config: AxiosRequestConfig<never>) {
+  async getAll(config?: AxiosRequestConfig<never>) {
     const response = await apiClient.get<RawgRes<TResponse>>(this.endpoint, config)
     return response.data
   }
 
-  async get(id: string | number, config?: AxiosRequestConfig<never>) {
-    const response = await apiClient.get<TResponse>(`${this.endpoint}/${id}`, config)
+  async get<OwnResponse = TResponse>(params: string | number, config?: AxiosRequestConfig<never>) {
+    const response = await apiClient.get<OwnResponse>(`${this.endpoint}/${params}`, config)
     return response.data
   }
 }
