@@ -23,7 +23,6 @@ const SortSelector = () => {
   ] as const
 
   const currentOrder = sortOrders.find(({ value }) => value === ordering)
-  console.log(ordering)
 
   return (
     <Menu>

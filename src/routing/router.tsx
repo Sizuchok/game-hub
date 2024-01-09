@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { Navigate, createBrowserRouter } from 'react-router-dom'
 import { ROUTER_KEYS } from '../common/const/react-router-keys.const'
 import { PrimaryLayout } from './layouts/primary-layout'
 import ErrorPage from './pages/error-page'
@@ -13,6 +13,10 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Navigate to={ROUTER_KEYS.GAMES.GAMES} />,
+      },
+      {
+        path: ROUTER_KEYS.GAMES.GAMES,
         element: <HomePage />,
       },
       {

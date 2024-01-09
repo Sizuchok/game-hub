@@ -14,10 +14,12 @@ const ExpandableText = ({ text, ...props }: Props) => {
 
   const shortenedText = text.substring(0, limit)
 
+  const textToDisplay = expanded ? text : shortenedText + '...'
+
   return (
     <Text {...props}>
-      {expanded ? text : shortenedText + '...'}
-      <Button ml={1} size={'xs'} onClick={() => setExpanded(!expanded)} colorScheme="green">
+      {textToDisplay + ' '}
+      <Button size={'xs'} onClick={() => setExpanded(!expanded)} colorScheme="green">
         {expanded ? 'Show less' : 'Read more'}
       </Button>
     </Text>
