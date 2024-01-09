@@ -4,7 +4,7 @@ import { GameDetailsParams } from '../../common/types/router-params.types'
 import ExpandableText from '../../components/util/expandable-text'
 import GameAttributes from '../../game/components/details-page/game-attributes'
 import GameBackgroundImage from '../../game/components/details-page/game-background-image'
-import GameScreenshots from '../../game/components/details-page/game-screenshot'
+import GameScreenshots from '../../game/components/details-page/game-screenshots'
 import GameTrailer from '../../game/components/details-page/game-trailer'
 import { useGame } from '../../game/hooks/use-game.hook'
 
@@ -33,9 +33,9 @@ const GameDetailsPage = () => {
             {game.name}
           </Heading>
           <ExpandableText text={game.description_raw} />
-          <GameTrailer game={game} />
           <GameAttributes game={game} />
           <GameScreenshots id={game.id} />
+          <GameTrailer game={game} />
         </Box>
       </Box>
       <GameBackgroundImage image={game.background_image} />

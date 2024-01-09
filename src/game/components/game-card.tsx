@@ -1,7 +1,6 @@
 import { Box, CardBody, HStack, Heading, Image, useColorModeValue } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import backgroundPlaceholder from '../../assets/game-backgroud-image-placeholder.jpg'
-import { ROUTER_KEYS } from '../../common/const/react-router-keys.const'
 import { Game } from '../../common/types/games.types'
 import { getCroppedImageUrl } from '../../services/utils/get-croppod-image-url.util'
 import CriticScore from './critic-score'

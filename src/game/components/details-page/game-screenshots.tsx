@@ -19,7 +19,8 @@ const GameScreenshots = ({ id }: Props) => {
         lg: 2,
       }}
       spacing={4}
-      mt={10}
+      mt={6}
+      justifyItems="center"
     >
       {screenshots.map(({ id, image }) => (
         <Image src={image} borderRadius={'md'} key={id} />

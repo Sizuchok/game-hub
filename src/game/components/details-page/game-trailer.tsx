@@ -17,7 +17,16 @@ const GameTrailer = ({ game }: Props) => {
   return (
     <>
       {first ? (
-        <Box as="video" src={first.data.max} poster={first.prewiew} controls width={720} mt={5} />
+        <Box
+          as="video"
+          src={first.data.max}
+          poster={first.prewiew}
+          controls
+          width={720}
+          mt={4}
+          mx={'auto'}
+          borderRadius={'md'}
+        />
       ) : null}
     </>
   )

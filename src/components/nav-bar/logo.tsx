@@ -1,11 +1,12 @@
-import { Icon, Link } from '@chakra-ui/react'
+import { Link as ChakraLink, Icon } from '@chakra-ui/react'
 import { PiGameController } from 'react-icons/pi'
+import { Link } from 'react-router-dom'
 
 const Logo = () => {
   return (
-    <Link display="flex" href="https://linktr.ee/liiusion" target="_blank">
+    <ChakraLink as={Link} to={'/'} display="flex">
       <Icon as={PiGameController} boxSize={12} />
-    </Link>
+    </ChakraLink>
   )
 }
 export default Logo
