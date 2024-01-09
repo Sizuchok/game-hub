@@ -16,6 +16,10 @@ export const router = createBrowserRouter([
         element: <Navigate to={ROUTER_KEYS.GAMES.GAMES} />,
       },
       {
+        path: 'some',
+        element: <div>SOME SOME SOME</div>,
+      },
+      {
         path: ROUTER_KEYS.GAMES.GAMES,
         element: <HomePage />,
       },
