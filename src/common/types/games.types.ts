@@ -7,7 +7,7 @@ import { Publisher } from './publisher.types'
 export type Game = Prettify<RawgCore> & {
   description: string
   description_raw: string
-  background_image: string | null
+  background_image: string
   genres: Genre[]
   parent_platforms?: { platform: Platform }[]
   metacritic: number

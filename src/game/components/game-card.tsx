@@ -44,7 +44,7 @@ const GameCard = ({ game }: Props) => {
               transition: 'color .4s',
             }}
           >
-            <Link to={`${ROUTER_KEYS.GAMES.GAMES}/${game.slug}`}>{game.name}</Link>
+            <Link to={`${game.slug}`}>{game.name}</Link>
           </Heading>
           <RatingIcon rating={game.rating_top} />
         </Box>

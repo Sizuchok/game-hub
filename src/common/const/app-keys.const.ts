@@ -8,12 +8,14 @@ export const RAWG_ENDPOINTS = {
   GENRES: 'genres',
   PARENT_PLATFORMS: 'platforms/lists/parents',
   GET_GAME_TRAILERS: (id: number) => `${id}/movies` as const,
+  GET_GAME_SCREENSHOTS: (id: number) => `${id}/screenshots` as const,
 } as const
 
 const QUERY_KEYS_GAMES = {
   GET_ALL: 'get-all-games',
   GET_ONE: 'get-one-game',
   GET_TRAILER: 'get-game-trailers',
+  GET_SCREENSHOTS: 'get-game-screenshots',
 } as const
 
 const QUERY_KEYS_GENRES = {

@@ -19,7 +19,7 @@ const ExpandableText = ({ text, ...props }: Props) => {
   return (
     <Text {...props}>
       {textToDisplay + ' '}
-      <Button size={'xs'} onClick={() => setExpanded(!expanded)} colorScheme="green">
+      <Button size={'xs'} h={5} onClick={() => setExpanded(!expanded)}>
         {expanded ? 'Show less' : 'Read more'}
       </Button>
     </Text>
