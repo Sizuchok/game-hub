@@ -11,7 +11,8 @@ import { useGame } from '../../game/hooks/use-game.hook'
 const GameDetailsPage = () => {
   const { slug } = useParams() as GameDetailsParams
 
-  const { data: game, isFetching, error } = useGame(slug)
+  const { data, isFetching, error } = useGame(slug)
+  const game = data!
 
   if (isFetching) {
     return (
@@ -21,7 +22,7 @@ const GameDetailsPage = () => {
     )
   }
 
-  if (error || !game) {
+  if (error) {
     throw error
   }
 
